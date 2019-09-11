@@ -26,6 +26,11 @@
         src: index.html.app1
         dest: /usr/share/tomcat/webapps/ansible/index.html
   when: inventory_hostname == "app1"
+  - name: copy static index.html to tomcat webapps/ansible/index.html
+    template:
+        src: index.html.app1
+        dest: /usr/share/tomcat/webapps/ROOT/index.html
+  when: inventory_hostname == "app1"
 
 - block:
   - name: create ansible tomcat directory
@@ -36,6 +41,12 @@
     template:
         src: index.html.app2
         dest: /usr/share/tomcat/webapps/ansible/index.html
+  when: inventory_hostname == "app2"
+
+  - name: copy static index.html to tomcat webapps/ansible/index.html
+    template:
+        src: index.html.app2
+        dest: /usr/share/tomcat/webapps/ROOT/index.html
   when: inventory_hostname == "app2"
 
 - name: start tomcat
